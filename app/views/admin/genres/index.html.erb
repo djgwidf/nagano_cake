@@ -1,0 +1,28 @@
+<h2>admin#index</h2>
+
+<div class="container">
+
+  <div class="row">
+    <h2>ジャンル一覧・追加</h2>
+  </div>
+
+<div class="row mt-5">
+    <div class="offset-sm-1 col-sm-4">
+      <div class="form-wrap border rounded p-5">
+        <div class="row d-flex justify-content-center">
+          <strong>ジャンル</strong>
+            <%= form_for(@genre, url: admin_genres_path) do |f| %>
+             <div class="form-group">
+               <%= f.text_field :name, class: "form-control" %>
+             </div>
+             <div class="row">
+               <%= f.submit "新規登録", class: "btn btn-primary mt-3 mx-auto" %>
+             </div>
+            <% end %>
+        </div>
+      </div>
+      
+    </div>
+ </div>
+
+</div>
