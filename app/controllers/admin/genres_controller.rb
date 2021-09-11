@@ -25,6 +25,10 @@ class Admin::GenresController < ApplicationController
  def update
 
  end
+ 
+ def show
+     @item = Ttem.find([:id])
+ end
 
  private
   def genre_params
