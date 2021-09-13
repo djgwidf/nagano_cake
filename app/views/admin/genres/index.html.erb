@@ -6,7 +6,7 @@
     <h2>ジャンル一覧・追加</h2>
   </div>
 
-<div class="row mt-5">
+  <div class="row mt-5">
     <div class="offset-sm-1 col-sm-4">
       <div class="form-wrap border rounded p-5">
         <div class="row d-flex justify-content-center">
@@ -21,8 +21,26 @@
             <% end %>
         </div>
       </div>
-      
+
     </div>
  </div>
+ <div class="offset-sm-1 col-sm-5">
+   <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th>ジャンル</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @genres.each do |genre| %>
+          <tr>
+            <td><%= genre.name %></td>
+            <td><%= link_to "編集する", edit_admin_genre_path(genre), class: "btn btn-primary btn-sm" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
 
 </div>

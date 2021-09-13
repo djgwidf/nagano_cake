@@ -12,14 +12,13 @@ class Admin::GenresController < ApplicationController
  end
 
  def create
-   @genre = Genre.new(genre_params)
-    if  @genre.save
-      redirect_to admin_genres_path
-    else
-
-      redirect_to
-    end
-
+     @genre = Genre.new(genre_params)
+     if
+         @genre.save
+         redirect_to admin_genres_path
+     else
+         redirect_to
+     end
  end
 
  def update
@@ -30,9 +29,9 @@ class Admin::GenresController < ApplicationController
      @item = Ttem.find([:id])
  end
 
- private
-  def genre_params
-    params.require(:@genre).permit(:name)
-  end
+private
+ def genre_params
+     params.require(:genre).permit(:name)
+ end
 
 end
