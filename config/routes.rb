@@ -14,8 +14,13 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admin do
+    root 'homes#top'
     resources :genres, only:[:index,:create,:update,:edit]
     resources :items, except: [:destroy]
     resources :customers, only: [:show,:index,:update,:edit]
+    resources :orders, only: [:index, :show]
   end
+
+  root 'homes#top'
+  get "home/about" => "homes#about"
 end
