@@ -23,4 +23,9 @@ Rails.application.routes.draw do
 
   root 'homes#top'
   get "home/about" => "homes#about"
+
+  resources :customers, only:[:show, :edit, :update]
+  get '/customers/:id/quit' => 'customers#quit', as: 'quit_customer'
+  patch '/customers/:id/out' => 'customers#out', as: 'out_switch_customer'
+  resources :addresses, except: [:new, :show]
 end
