@@ -28,4 +28,16 @@ Rails.application.routes.draw do
   get '/customers/:id/quit' => 'customers#quit', as: 'quit_customer'
   patch '/customers/:id/out' => 'customers#out', as: 'out_switch_customer'
   resources :addresses, except: [:new, :show]
+  resources :items, only: [:index, :show]
+  resources :ship_addresses, except: [:new, :show]
+  resources :cart_items, except: [:new, :show, :edit]
+  delete '/cart_items' => 'cart_items#destroy_all'
+  resources :genres, only: [:index] do
+  resources :items, only: [:index]
+  resources :orders, except: [:edit, :update, :destroy]
+  get '/orders/log' => 'orders#log', as: 'orders_log' #購入確認画面への遷移
+  get '/orders/create_order' => 'orders#create_order' #購入確定のアクション
+  post '/orders/create_ship_address' => 'orders#create_ship_address'
+  
+  end
 end

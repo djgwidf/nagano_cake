@@ -44,7 +44,7 @@
      <tbody>
        <% @ship_addresses.each do |ship_address| %>
        <tr class="brown-border">
-     	   <td><%= ship_address.post_code %></td>
+     	   <td><%= ship_address.postal_code %></td>
      	   <td><%= ship_address.address %></td>
      	   <td><%= ship_address.last_name %><%= ship_address.first_name %></td>
      	   <td><%= link_to "編集する", edit_ship_address_path(ship_address),  class: "btn btn-sm btn-outline-danger" %>

@@ -5,4 +5,9 @@ class Item < ApplicationRecord
 	validates :is_active,    presence: true
 
 	attachment :image_id
+	# ！！with optionでまとめる！！
+	has_many :cart_items, dependent: :destroy
+	belongs_to :genre
+	attachment :image_id
+	enum is_active: [:販売可, :販売不可]
 end
