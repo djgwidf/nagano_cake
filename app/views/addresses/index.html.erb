@@ -1,0 +1,32 @@
+<div class="container my-5">
+	<div class="row">
+	  <div class="offset-1">
+		   <h2 class="red-border px-3 pb-1">配送先</h2>
+    </div>
+	</div>
+
+	<div class="row my-3">
+   <div class="offset-1 col-6">
+    <table class="table table-borderless table-hover">
+      <thead>
+       <tr class="red-border">
+         <th>郵便番号</th>
+         <th>住所</th>
+         <th>宛名</th>
+         <th></th>
+       </tr>
+      </thead>
+
+     <tbody>
+       <tr class="brown-border">
+     	   <td><%= current_customer.postal_code %></td>
+     	   <td><%= current_customer.address %></td>
+     	   <td><%= current_customer.last_name %><%= current_customer.first_name %></td>
+     	   <td><%= link_to "編集する", edit_address_path(current_customer),  class: "btn btn-sm btn-outline-danger" %>
+         </td>
+       </tr>
+     </tbody>
+    </table>
+  </div>
+ </div>
+</div>

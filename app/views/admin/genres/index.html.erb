@@ -11,7 +11,7 @@
       <div class="form-wrap border rounded p-5">
         <div class="row d-flex justify-content-center">
           <strong>ジャンル</strong>
-            <%= form_for(@genre, url: admin_genres_path) do |f| %>
+            <%= form_with model: @genre, url: admin_genres_path, local:true do |f| %>
              <div class="form-group">
                <%= f.text_field :name, class: "form-control" %>
              </div>

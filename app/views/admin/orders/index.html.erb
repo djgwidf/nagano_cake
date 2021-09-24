@@ -24,7 +24,6 @@
               <%= order.customer.first_name %>
             </td>
             <td><%= order.order_details.sum(:quantity) %></td>
-            <td><%= order.order_status %></td>
           </tr>
         <% end %>
       </tbody>

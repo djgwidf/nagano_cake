@@ -1,5 +1,7 @@
 class Admin::GenresController < ApplicationController
 
+  before_action :authenticate_admin!
+
   def index
     @genre = Genre.new
     @genres = Genre.all
@@ -22,9 +24,16 @@ class Admin::GenresController < ApplicationController
  end
 
  def update
+   genre = Genre.find(params[:id])
+    if genre.update(genre_params)
+      redirect_to admin_genres_path
+    else
+      flash[:genre_updated_error] = "ジャンル名を入力してください"
+      redirect_to edit_admin_genre_path(genre)
+    end
 
  end
- 
+
  def show
      @item = Ttem.find([:id])
  end

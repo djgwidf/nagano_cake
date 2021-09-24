@@ -10,12 +10,12 @@
     <% end %>
   </div>
 
-  <%= form_for(@item, url: admin_items_path) do |f| %>
+  <%= form_with(model: @item, url: admin_items_path, method: :POST) do |f| %>
 
     <div class="row mt-5">
       <div class="col-sm-4">
         <%= f.label :商品画像 %>
-        <%= f.attachment_field :image_id %>
+        <%= f.attachment_field :image %>
       </div>
 
       <div class="col-sm-5">
@@ -42,7 +42,7 @@
 
         <div class="form-group row">
           <%= f.label :販売ステータス, class: "col-sm-4" %>
-          <%= f.select :is_active, [["販売可", "販売可"], ["販売不可","販売不可"]], class: "form-control col-sm-8" %>
+          <%= f.select :is_active, [["販売中", "販売中"], ["販売停止中", "販売停止中"]], class: "form-control col-sm-8" %>
         </div>
       </div>
 

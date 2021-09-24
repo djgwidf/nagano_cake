@@ -1,15 +1,18 @@
 class Admin::ItemsController < ApplicationController
 
+  before_action :authenticate_admin!
+
   def new
     @item = Item.new
   end
 
   def create
-    @item = Item.new(params[:id])
-    if 
+    @item = Item.new(item_params)
+    if
       @item.save
       redirect_to admin_items_path
     else
+      flash[:item_created_error] = "商品情報が正常に保存されませんでした。"
       redirect_to new_admin_item_path
     end
   end
@@ -29,17 +32,18 @@ class Admin::ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    if 
+    if
       @item.update(item_params)
       redirect_to admin_item_path(@item)
     else
+      flash[:item_updated_error] = "商品情報が正常に更新されませんでした。"
       redirect_to edit_admin_item_path(@item)
     end
   end
 
  private
   def item_params
-    params.require(:@item).permit(:genre_id, :image_id, :name, :introduction, :price, :is_active)
+    params.require(:item).permit(:genre_id, :image, :name, :introduction, :price, :is_active)
   end
 
 end

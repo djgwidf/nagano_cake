@@ -1,24 +1,24 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark navbar-fixed-top", style="background-color: #432c28;">
-  <div class="container">
+<nav class="navbar navbar-expand navbar-dark bg-dark navbar-fixed-top p-5", style="background-color: #432c28;">
+  <div class="container ">
     <div class="row">
       <%= link_to "NAGANO_CAKE", root_path, class: "navbar-brand" %>
         <ul class="navbar-nav">
           <% if customer_signed_in? %>
             <li class="nav-item"><%= link_to "マイページ", customer_path(current_customer), class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "商品一覧", customer_path(current_customer), class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "カート", customer_path(current_customer), class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "商品一覧", items_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "カート", cart_items_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link" %></li>
           <% else %>
             <li class="nav-item"><%= link_to "About", home_about_path, class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "商品一覧", admin_items_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "商品一覧", items_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "新規登録", new_customer_registration_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "ログイン", new_customer_session_path, class: "nav-link" %></li>
-        </ul>
+          <% end %>
             <form class="form-inline">
             <input class="form-control-sm mr-sm-2" type="search" placeholder="検索...機能しないけど..." aria-label="検索...">
             <button type="submit" class="btn btn-outline-light btn-sm my-2 my-sm-0">検索</button>
             </form>
-          <% end %>
+        </ul>
     </div>
   </div>
 </nav>

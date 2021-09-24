@@ -25,7 +25,7 @@ class CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(is_active: false)
-      sign_out current_customer #URLを踏ませずにコントローラーから直接サインアウトの指示を出す（device公式)
+      sign_out current_customer
     end
       redirect_to root_path
   end

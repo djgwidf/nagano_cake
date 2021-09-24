@@ -2,7 +2,7 @@
   <div class="row">
     <div class="offset-1">
       <%= flash[:order_new] %>
-      <h2 class="red-border px-3">購入情報入力</h2>
+      <h2 class="red-border px-3">注文情報入力</h2>
     </div>
   </div>
 
@@ -11,7 +11,7 @@
 
 <!-- 支払い方法選択 -->
       <div class="row">
-        <strong class="red-border px-3">お支払い方法</strong>
+        <strong class="red-border px-3">支払方法</strong>
       </div>
 
       <%= form_tag(orders_path, method: :post) do %>
@@ -28,14 +28,11 @@
         </div>
 
         <div class="form-check mt-3">
-          <% address = current_customer.post_code + current_customer.address + current_customer.last_name + current_customer.first_name %>
+          <% address = current_customer.postal_code + current_customer.address + current_customer.last_name + current_customer.first_name %>
           <%= radio_button_tag :select, :my_address %>
           <%= label_tag :select, "ご自身の住所", {value: :my_address, style: "display: inline-block;"} %>
           <%= address %><br>
-          <%= radio_button_tag :select, :select_address %>
-          <%= select_tag :address, options_for_select(@ship_addresses.map do |ship|
-          ["〒" + ship.post_code + "  " + ship.address + "  " + ship.last_name + ship.first_name, ship.id]
-            end), {include_blank: '配送先を選択'} %>
+
         </div>
 
         <div class="row mt-5">
@@ -53,10 +50,10 @@
         <strong class="red-border px-3">新しいお届け先を登録する</strong>
       </div>
 
-        <%= form_for(@ship_address, url:orders_create_ship_address_path) do |f| %>
+        <%= form_for(@address, url:orders_create_order_path) do |f| %>
 
         <div class="form-group row mt-3">
-          <%= f.text_field :post_code, placeholder: "郵便番号", class: "form-control offset-1 col-10" %>
+          <%= f.text_field :postal_code, placeholder: "郵便番号", class: "form-control offset-1 col-10" %>
         </div>
 
         <div class="form-group row">
@@ -64,8 +61,7 @@
         </div>
 
         <div class="form-group row">
-          <%= f.text_field :last_name, placeholder:"姓", class: "form-control offset-1 col-5" %>
-          <%= f.text_field :first_name, placeholder:"名", class: "form-control col-5" %>
+          <%= f.text_field :name, placeholder:"名前", class: "form-control offset-1 col-5" %>
         </div>
 
         <div class="row">

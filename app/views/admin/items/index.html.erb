@@ -1,4 +1,4 @@
-<h2>items#index</h2>
+
 <div class= "container my-5">
   <div class= "row">
     <h2>商品一覧画面</h2>
@@ -26,7 +26,16 @@
           <td><%= link_to item.name, admin_item_path(item) %></td>
           <td><%= item.price %></td>
           <td><%= item.genre.name %></td>
-          <td><%= item.is_active %></td>
+        　<td><% if item.is_active == true %>
+              <div class= "bg-info d-inline text-white p-1 ml-3 rounded">
+                    販売中
+              </div>
+              <% else %>
+              <div class= "bg-warning d-inline text-white p-1 ml-3 rounded">
+                    販売停止中
+              <% end %>
+              </div>
+          </td>
         </tr>
         <% end %>
       </tbody>
