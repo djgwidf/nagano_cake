@@ -24,17 +24,24 @@ Rails.application.routes.draw do
   root 'homes#top'
   get "home/about" => "homes#about"
 
-  resources :customers, only:[:show, :edit, :update]
   get '/customers/:id/quit' => 'customers#quit', as: 'quit_customer'
-  patch '/customers/:id/out' => 'customers#out', as: 'out_switch_customer'
+  patch '/customers/:id/out' => 'customers#out', as: 'out_customer'
+  resources :customers, only:[:show, :edit, :update]
+
   resources :addresses, except: [:new, :show]
   resources :items, only: [:index, :show]
-  resources :cart_items, except: [:new, :show, :edit]
   delete '/cart_items' => 'cart_items#destroy_all'
-  resources :orders, except: [:edit, :update, :destroy]
+  resources :cart_items, except: [:new, :show, :edit]
+
   get '/orders/log' => 'orders#log', as: 'orders_log'
-  get '/orders/create_order' => 'orders#create_order'
+  post '/orders/log' => 'orders#log'
+  post '/orders/create_order' => 'orders#create_order'
   post '/orders/create_address' => 'orders#create_address'
+  get '/orders/thanks' => 'orders#thanks'
+  resources :orders, except: [:edit, :update, :destroy]
+  post '/orders/create_new' => 'orders#new'
+
+
   resources :genres, only: [:index] do
   resources :items, only: [:index]
   end

@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   def index
-    @order = Order.where(customer_id:current_customer)
+    @orders = current_customer.orders.all
+
   end
 
   def show
@@ -15,13 +16,13 @@ class OrdersController < ApplicationController
   end
 
   def create
-   session[:payment] = params[:payment]
+   session[:payment_method] = params[:payment_method]
     if params[:select] == "select_address"
       session[:address] = params[:address]
     elsif params[:select] == "my_address"
      session[:address] ="〒" + current_customer.postal_code + current_customer.address + current_customer.last_name + current_customer.first_name
     end
-    if session[:address].present? && session[:payment].present?
+    if session[:address].present? && session[:payment_method].present?
       redirect_to orders_log_path
     else
       flash[:order_new] = "支払い方法と配送先を選択して下さい"
@@ -30,12 +31,19 @@ class OrdersController < ApplicationController
   end
 
   def log
-      @orders = current_customer.orders
-      @total_price = calculate(current_customer)
-
-      if  session[:address].length <8
-        @address = Address.find(session[:address])
-      end
+    @order = Order.new
+    @order.customer_id = current_customer.id
+    @orders = current_customer.orders
+    @order.payment_method = session[:payment_method]
+    @order.postage = 800
+    @total_price = calculate(current_customer)
+    @order.price = @total_price
+      binding.pry
+    if params[:select] == "my_address"
+      @order.name = current_customer.last_name
+      @order.postal_code = current_customer.postal_code
+      @order.address = current_customer.address
+    end
   end
 
   def create_address
@@ -47,44 +55,42 @@ class OrdersController < ApplicationController
 
 
   def create_order
-    @order = Order.new
-    @order.customer_id = current_customer.id
     @order.address = session[:address]
-    @order.payment = session[:payment]
-    @order.total_price = calculate(current_customer)
+
+    @order.price = calculate(current_customer)
+
+    binding.pry
     @order.save
 
     current_customer.cart_items.each do |cart|
       @order_detail = OrderDetail.new
       @order_detail.order_id = @order.id
-      @order_detail.item_name = cart.item.name
-      @order_detail.item_price = cart.item.price
+      @order_detail.item_id = cart.item.id
+      @order_detail.unit_price = cart.item.price
       @order_detail.amount = cart.amount
-      @order_detail.item_status = 0
       @order_detail.save
 
     end
     current_customer.cart_items.destroy_all
     session.delete(:address)
-    session.delete(:payment)
-    redirect_to thanks_path
+    session.delete(:payment_method)
+    redirect_to orders_thanks_path
   end
 
   private
-   def ship_address_params
-     params.require(:ship_address).permit(:customer_id,:last_name, :first_name, :postal_code, :address)
+   def address_params
+     params.require(:address).permit(:customer_id,:last_name, :first_name, :postal_code, :address)
    end
    def order_params
-     params.require(:order).permit(:customer_id, :address, :payment, :total_price)
+     params.require(:order).permit(:customer_id, :address, :payment_method, :total_price)
    end
 
-   # 商品合計（税込）の計算
    def calculate(user)
-     total_price = 0
+     price = 0
      user.cart_items.each do |cart_item|
-       total_price += cart_item.amount * cart_item.item.price
+       price += cart_item.amount * cart_item.item.price
      end
-     return (total_price * 1.1).floor
+     return (price * 1.1).floor
    end
 
 end

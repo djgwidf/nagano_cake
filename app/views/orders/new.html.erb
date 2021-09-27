@@ -8,21 +8,18 @@
 
   <div class="row mt-5">
     <div class="offset-2 col-5">
-
-<!-- 支払い方法選択 -->
       <div class="row">
         <strong class="red-border px-3">支払方法</strong>
       </div>
 
-      <%= form_tag(orders_path, method: :post) do %>
+      <%= form_tag(orders_log_path, method: :post) do %>
         <div class="form-check mt-3">
-          <%= radio_button_tag :payment, :クレジットカード %>
-          <%= label_tag :payment, "クレジットカード", {value: :"クレジットカード", style: "display: inline-block;"} %><br>
-          <%= radio_button_tag :payment, :銀行振込 %>
-          <%= label_tag :payment, "銀行振込", {value: :"銀行振込", style: "display: inline-block;"} %>
+          <%= radio_button_tag :payment_method, :クレジットカード %>
+          <%= label_tag :payment_method, "クレジットカード", {value: :"クレジットカード", style: "display: inline-block;"} %><br>
+          <%= radio_button_tag :payment_method, :銀行振込 %>
+          <%= label_tag :payment_method, "銀行振込", {value: :"銀行振込", style: "display: inline-block;"} %>
         </div>
-
-<!-- お届け先選択 -->
+        
         <div class="row mt-3">
           <strong class="red-border px-3">お届け先</strong>
         </div>

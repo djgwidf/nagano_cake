@@ -1,7 +1,9 @@
 <div class="container my-5">
   <div class="row">
-    <div class="offset-sm-3 col-sm-7">
-
+    <div class="col-xs-3">
+		 <%= render 'genre_serch', genres: @genres %>
+		</div>
+		<div class="col-xs-9">
       <p>ようこそ、ながのCAKEへ！</p>
       <p>このサイトは、ケーキ販売のECサイトになります。</p>
       <p>会員でない方も商品の閲覧はできますが、</p>
@@ -17,7 +19,6 @@
 		        <span class="ml-auto"><%= (item.price * 1.1).floor %>円</span><br>
           </div>
         <% end %>
-      </div>
       </div>
     </div>
   </div>

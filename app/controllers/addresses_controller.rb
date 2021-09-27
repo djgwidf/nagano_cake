@@ -1,18 +1,19 @@
 class AddressesController < ApplicationController
   def index
     @address_new = Address.new
-    @address = current_customer.address
+    @address = Address.all
   end
 
   def edit
-    @address = current_customer.address
+    @address = Address.find([:id])
   end
 
   def update
+    @address = Address.find(params[:id])
      if address.update(address_params)
-      redirect_to index_address_path(current_customer)
+      redirect_to addresses_path
      else
-      flash[:genre_updated_error] = "ジャンル名を入力してください"
+      flash[:address_updated_error] = "入力してください"
       redirect_to edit_address_path(current_customer)
      end
   end

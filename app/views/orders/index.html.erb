@@ -13,7 +13,6 @@
             <th>配送先</th>
             <th>注文商品</th>
             <th>支払金額</th>
-            <th>ステータス</th>
             <th>注文詳細</th>
           </tr>
         </thead>
@@ -22,26 +21,18 @@
           <% @orders.each do |order| %>
             <tr class="brown-border">
               <td class="align-middle"><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-
-              <% if order.address.length <8 %>
-              <% ship_address = ShipAddress.find(order.address) %>
               <td class="align-middle">
-                <%= "〒" + ship_address.post_code + "  " + ship_address.address + "  " + ship_address.last_name + ship_address.first_name %>
+                <p><%= order.postal_code %>&emsp;<%= order.address %></p>
               </td>
-
-              <% else %>
-              <td class="align-middle"><%= order.address %></td>
-              <% end %>
-
               <td class="align-middle">
                 <% order.order_details.each do |f| %>
-                <%= f.item_name %><br>
+                <%= f.item.name %><br>
                 <% end %>
               </td>
 
-              <td class="align-middle"><%= order.total_price %></td>
+              </td>
 
-              <td class="align-middle"><%= order.order_status %></td>
+              <td class="align-middle"><%= order.price %></td>
 
               <td class="align-middle"><%=link_to "表示する", order_path(order), class: "btn btn-sm btn-outline-danger" %></td>
             </tr>

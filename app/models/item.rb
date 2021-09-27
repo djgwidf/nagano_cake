@@ -7,6 +7,7 @@ class Item < ApplicationRecord
 
 	has_many :cart_items, dependent: :destroy
 	belongs_to :genre
+	belongs_to :order_detail
 	attachment :image
 
 end
