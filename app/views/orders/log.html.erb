@@ -18,6 +18,7 @@
         </thead>
 
         <tbody>
+
           <% current_customer.cart_items.each do |cart| %>
             <tr class="brown-border">
               <td>
@@ -37,8 +38,6 @@
       </table>
 
     </div>
-
-<!-- 金額の情報 -->
     <div class="col-2 d-flex">
 
       <table class="table table-sm table-borderless align-self-end">
@@ -66,26 +65,30 @@
 
   <div class="row mt-5">
     <div class="offset-2 col-6">
+      <%= form_with model: @order, url: orders_path, local: true do |f| %>
+          <%= f.hidden_field :name,:value => @order.name %>
+          <%= f.hidden_field :postal_code,:value => @order.postal_code %>
+          <%= f.hidden_field :address,:value => @order.address %>
+          <%= f.hidden_field :payment_method,:value => @order.payment_method %>
+          <%= f.hidden_field :price,:value => @order.price %>
+          <%= f.hidden_field :postage,:value => @order.postage %>
       <div class="row mt-3">
         <strong class="red-border px-3 mr-3">お支払い方法</strong>
-        <span class="brown-border px-3"><%= session[:payment] %></span>
+        <span class="brown-border px-3"><%= @order.payment_method_i18n %></span>
       </div>
 
       <div class="row mt-3">
         <strong class="red-border px-3 mr-3">　お届け先　</strong>
         <span class="brown-border px-3">
-          <% if  session[:address].length < 8 %>
-           <%= "〒" + @address.postal_code + "  " + @address.address + "  " + @address.last_name + @address.first_name %><span>様</span>
-          <% else %>
-           <%= session[:address] %><span>様</span>
-          <% end %>
+          <%= "〒" + @order.postal_code + "  " + @order.address + "  " + @order.name %><span>様</span>
         </span>
       </div>
-    </div>
+  　   <div class="col-3">
 
-    <div class="col-3">
-      <%=link_to "購入を確定する", orders_create_order_path, method: :post, class: "btn btn-lg btn-danger ml-auto" %>
-    </div>
 
+          <%= f.submit "購入を確定する", method: :post, class: "btn btn-lg btn-danger ml-auto" %>
+      </div>
+        <% end %>
+    </div>
   </div>
-</div>
+

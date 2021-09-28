@@ -8,11 +8,14 @@ class ItemsController < ApplicationController
       @items = Item.where(is_active: "販売中").page(params[:page]).per(5)
     end
   end
+  
+
 
   def show
     @cart_item = CartItem.new
   	@genres = Genre.all
   	@item = Item.find(params[:id])
   end
+  
 
 end

@@ -12,14 +12,15 @@
         <strong class="red-border px-3">支払方法</strong>
       </div>
 
-      <%= form_tag(orders_log_path, method: :post) do %>
+      <%= form_with model: @order, url: orders_log_path, method: :post, local: true do |f| %>
         <div class="form-check mt-3">
-          <%= radio_button_tag :payment_method, :クレジットカード %>
-          <%= label_tag :payment_method, "クレジットカード", {value: :"クレジットカード", style: "display: inline-block;"} %><br>
-          <%= radio_button_tag :payment_method, :銀行振込 %>
-          <%= label_tag :payment_method, "銀行振込", {value: :"銀行振込", style: "display: inline-block;"} %>
+
+          <%= f.collection_radio_buttons :payment_method, Order.payment_methods_i18n, :first, :last %>
+          <%#= label_tag :payment_method, "クレジットカード", {value: :"クレジットカード", style: "display: inline-block;"} %><br>
+          <%#= radio_button_tag :payment_method, :銀行振込 %>
+          <%#= label_tag :payment_method, "銀行振込", {value: :"銀行振込", style: "display: inline-block;"} %>
         </div>
-        
+
         <div class="row mt-3">
           <strong class="red-border px-3">お届け先</strong>
         </div>
@@ -35,20 +36,18 @@
         <div class="row mt-5">
           <%= submit_tag "確認画面へ進む", class: "btn btn-outline-danger ml-auto" %>
         </div>
-      <% end %>
 
 
     </div>
 
     <div class=" offset-1 col-3">
 
-<!-- 新しいお届け先 -->
-      <div class="row">
-        <strong class="red-border px-3">新しいお届け先を登録する</strong>
+      <!--div class="row">
+        <strong class="red-border px-3">それ以外の住所</strong>
       </div>
-
-        <%= form_for(@address, url:orders_create_order_path) do |f| %>
-
+        <!%= radio_button_tag :select, :my_address %>
+          <!%= label_tag :select, "新規お届け先住所", {value: :my_address, style: "display: inline-block;"} %>
+         <%= form_with model: @address, url: orders_log_path, local: true do |f| %>
         <div class="form-group row mt-3">
           <%= f.text_field :postal_code, placeholder: "郵便番号", class: "form-control offset-1 col-10" %>
         </div>
@@ -66,6 +65,7 @@
         </div>
 
         <% end %>
+      <% end %>
     </div>
 
 

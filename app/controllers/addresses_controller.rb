@@ -1,15 +1,19 @@
 class AddressesController < ApplicationController
   def index
-    @address_new = Address.new
-    @address = Address.all
+    @address = current_customer.address
+    @addresses = Address.all
   end
 
   def edit
-    @address = Address.find([:id])
+    @address = current_customer.address
+
+  end
+
+  def create
   end
 
   def update
-    @address = Address.find(params[:id])
+    @address = current_customer.address
      if address.update(address_params)
       redirect_to addresses_path
      else

@@ -21,13 +21,12 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
   end
 
-  root 'homes#top'
+  root 'home#top'
   get "home/about" => "homes#about"
 
   get '/customers/:id/quit' => 'customers#quit', as: 'quit_customer'
   patch '/customers/:id/out' => 'customers#out', as: 'out_customer'
   resources :customers, only:[:show, :edit, :update]
-
   resources :addresses, except: [:new, :show]
   resources :items, only: [:index, :show]
   delete '/cart_items' => 'cart_items#destroy_all'
@@ -35,12 +34,8 @@ Rails.application.routes.draw do
 
   get '/orders/log' => 'orders#log', as: 'orders_log'
   post '/orders/log' => 'orders#log'
-  post '/orders/create_order' => 'orders#create_order'
-  post '/orders/create_address' => 'orders#create_address'
-  get '/orders/thanks' => 'orders#thanks'
+  get '/orders/thankx' => 'orders#thankx'
   resources :orders, except: [:edit, :update, :destroy]
-  post '/orders/create_new' => 'orders#new'
-
 
   resources :genres, only: [:index] do
   resources :items, only: [:index]

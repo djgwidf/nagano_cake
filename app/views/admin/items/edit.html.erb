@@ -9,7 +9,7 @@
          <span class "text-danger"><%= flash[:item_updated_error] %></span>
         <% end %>
     </div>
-　　<%= form_with model: @item, url: admin_items_path, local: true do |f| %>
+　　<%= form_with model: @item, url: admin_items_path, method: :PUT, local: true do |f| %>
     <div class= "row mt-3">
         <div class= "col-sm-3">
             <%= f.label :商品画像 %>
