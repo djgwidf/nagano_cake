@@ -13,21 +13,23 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+
   namespace :admin do
-    root 'homes#top'
+    root 'orders#index'
     resources :genres, only:[:index,:create,:update,:edit]
     resources :items, except: [:destroy]
     resources :customers, only: [:show,:index,:update,:edit]
     resources :orders, only: [:index, :show]
   end
 
-  root 'home#top'
+  root 'homes#top'
   get "home/about" => "homes#about"
 
   get '/customers/:id/quit' => 'customers#quit', as: 'quit_customer'
   patch '/customers/:id/out' => 'customers#out', as: 'out_customer'
   resources :customers, only:[:show, :edit, :update]
   resources :addresses, except: [:new, :show]
+  #patch '/admin/items/:id/' => 'admin/items#update'
   resources :items, only: [:index, :show]
   delete '/cart_items' => 'cart_items#destroy_all'
   resources :cart_items, except: [:new, :show, :edit]

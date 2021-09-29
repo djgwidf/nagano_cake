@@ -1,9 +1,7 @@
-<h2>order#index</h2>
 <div class="container my-5">
   <div class="row">
     <h2>注文一覧画面</h2>
   </div>
-
   <div class="row mt-5">
     <table class="table table-hover">
       <thead>
@@ -11,15 +9,12 @@
           <th>購入日時</th>
           <th>購入者</th>
           <th>注文個数</th>
-          <th>注文ステータス</th>
         </tr>
       </thead>
-
       <tbody>
         <% @orders.each do |order| %>
           <tr>
             <td><%= link_to order.created_at.strftime("%Y-%m-%d %H:%M"), admin_order_path(order) %></td>
-            <!-- .strftime => created_atの表記を設定 -->
             <td><%= order.customer.last_name %>
               <%= order.customer.first_name %>
             </td>

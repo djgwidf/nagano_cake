@@ -14,7 +14,8 @@ class AddressesController < ApplicationController
 
   def update
     @address = current_customer.address
-     if address.update(address_params)
+     if
+       @address.update(address_params)
       redirect_to addresses_path
      else
       flash[:address_updated_error] = "入力してください"

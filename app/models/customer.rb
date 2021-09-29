@@ -11,7 +11,6 @@ class Customer < ApplicationRecord
   validates :postal_code,      presence: true, format: {with: /\A\d{7}\z/}
   validates :telephone_number, presence: true, format: {with: /\A\d{10}$|^\d{11}\z/, message: '10桁か11桁の電話番号を入力してください。'}
   validates :address,          presence: true
-  validates :is_active,        presence: true
   has_many :cart_items,        dependent: :destroy
   has_many :addresses,         dependent: :destroy
   has_many :orders,            dependent: :destroy

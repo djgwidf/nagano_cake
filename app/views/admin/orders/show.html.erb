@@ -2,11 +2,9 @@
   <div class="row">
     <h2>注文詳細</h2>
   </div>
-
   <div class="row mt-3">
     <div class="col-sm-9">
       <table class="table table-borderless">
-
         <tbody>
           <tr>
             <td>購入者</td>
@@ -17,12 +15,10 @@
               <% end %>
             </td>
           </tr>
-
           <tr>
             <td>配送先</td>
             <td>〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></td>
           </tr>
-
           <tr>
             <td>支払方法</td>
             <td><%= @order.payment_method %></td>
@@ -30,14 +26,11 @@
             </td>
           </tr>
         </tbody>
-
       </table>
     </div>
   </div>
-
   <div class="row mt-3">
     <div class="col-sm-9">
-
       <table class="table table-hover">
         <thead>
           <tr>
@@ -48,7 +41,6 @@
             <th colspan="1"></th>
           </tr>
         </thead>
-
         <% @order_details.each do |order_detail| %>
           <tbody>
             <tr>
@@ -61,7 +53,6 @@
         <% end %>
       </table>
     </div>
-
     <div class="col-sm-3 d-flex">
       <table class="table table-borderless align-self-end">
         <tbody>
@@ -69,19 +60,16 @@
             <td>商品合計</td>
             <td><%= @items_total_price %></td>
           </tr>
-
           <tr class="border-bottom border-dark">
             <td>送料</td>
             <td><%= @order.postage %></td>
           </tr>
-
           <tr class="border-bottom border-dark">
             <td>請求合計金額</td>
             <td><%= @order.price + @order.postage %></td>
           </tr>
         </tbody>
       </table>
-
     </div>
   </div>
 </div>

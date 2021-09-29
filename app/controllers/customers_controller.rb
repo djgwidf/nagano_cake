@@ -11,7 +11,7 @@ class CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
-    if @customer.update(customer_params)#"You have edited user data successfully."
+    if @customer.update(customer_params)
       redirect_to customer_path(@customer)
     else
       render 'edit'
@@ -21,11 +21,11 @@ class CustomersController < ApplicationController
   def quit
      @customer = Customer.find(params[:id])
   end
-  
+
   def out
      @customer = Customer.find(params[:id])
     if @customer.update(is_active: false)
-      sign_out current_customer #URLを踏ませずにコントローラーから直接サインアウトの指示を出す（device公式)
+      sign_out current_customer
     end
       redirect_to root_path
   end

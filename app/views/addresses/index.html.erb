@@ -16,15 +16,14 @@
          <th></th>
        </tr>
       </thead>
-
      <tbody>
        <tr class="brown-border">
-         <%# @addresses.each do |address| %>
-     	   <td><%= current_customer.postal_code %></td>
-     	   <td><%= current_customer.address %></td>
-     	   <td><%= current_customer.last_name %><%= current_customer.first_name %></td>
-     	   <td><%= link_to "編集する", edit_address_path(@address),  class: "btn btn-sm btn-outline-danger" %></td>
-     	   <%# end %>
+         <% @addresses.each do |address| %>
+     	   <td><%= @address.postal_code %></td>
+     	   <td><%= @address.address %></td>
+     	   <td><%= @address.name %></td>
+     	   <td><%= link_to "編集する", edit_address_path(address), class: "btn btn-sm btn-outline-danger" %></td>
+     	   <% end %>
        </tr>
      </tbody>
     </table>
