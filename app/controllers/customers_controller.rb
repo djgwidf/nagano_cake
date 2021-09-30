@@ -14,6 +14,7 @@ class CustomersController < ApplicationController
     if @customer.update(customer_params)
       redirect_to customer_path(@customer)
     else
+      flash[:customer_updated_error] = "入力してください"
       render 'edit'
     end
   end
@@ -30,19 +31,19 @@ class CustomersController < ApplicationController
       redirect_to root_path
   end
 
-  def update
-    @customer = Customer.find(params[:id])
-    if @customer.update(is_active: false)
-      sign_out current_customer
-    end
-      redirect_to root_path
-  end
+  #def update
+    #@customer = Customer.find(params[:id])
+    #if @customer.update(is_active: false)
+      #sign_out current_customer
+    #end
+      #redirect_to root_path
+  #end
 
 
 
   private
   def customer_params
-  	  params.require(:customer).permit(:is_active, :last_name, :first_name, :last_name_kana, :first_name_kana, :telephone_number, :email, :password, :postal_code, :address)
+  	  params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :telephone_number, :email, :postal_code, :address)
   end
 
   def ensure_correct_customer

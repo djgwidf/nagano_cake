@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   get '/customers/:id/quit' => 'customers#quit', as: 'quit_customer'
   patch '/customers/:id/out' => 'customers#out', as: 'out_customer'
+  #patch '/customers/:id/' => 'customers#'
   resources :customers, only:[:show, :edit, :update]
   resources :addresses, except: [:new, :show]
   #patch '/admin/items/:id/' => 'admin/items#update'

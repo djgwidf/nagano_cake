@@ -4,10 +4,15 @@
       <h2 class= "red-border px-3 pb-1">会員情報編集</h2>
     </div>
   </div>
+  <div class="row d-flex justify-content-center">
+        <% if flash[:customer_updated_error] %>
+        <span class="text-danger"><%= flash[:customer_updated_error] %></span>
+        <% end %>
+  </div>
 
   <div class="row my-3">
     <div class="offset-3 col-6">
-      <%= form_with madel: @customer, local: true do |f| %>
+      <%= form_with model: @customer, local: true do |f| %>
       <div class="form-group">
         <%= f.label :氏名, class: "brown-border px-3" %>
         <div class="row">

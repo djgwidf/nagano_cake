@@ -1,7 +1,6 @@
 class AddressesController < ApplicationController
   def index
     @address = current_customer.address
-    @addresses = Address.all
   end
 
   def edit
@@ -12,16 +11,16 @@ class AddressesController < ApplicationController
   def create
   end
 
-  def update
-    @address = current_customer.address
-     if
-       @address.update(address_params)
-      redirect_to addresses_path
-     else
-      flash[:address_updated_error] = "入力してください"
-      redirect_to edit_address_path(current_customer)
-     end
-  end
+  #def update
+    #@address = current_customer.address
+     #if
+       #@address.update( )
+      #redirect_to addresses_path
+     #else
+      #flash[:address_updated_error] = "入力してください"
+      #redirect_to index_address_path
+     #end
+  #end
 
 private
   def address_params
